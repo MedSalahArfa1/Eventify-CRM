@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/feedbacks")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class FeedbackController {
     @Autowired
     private FeedbackServiceInter feedbackService;

@@ -6,6 +6,9 @@ import com.eventify.backend.repositories.RoleRepository;
 import com.eventify.backend.repositories.UserRepository;
 import com.eventify.backend.services.servicesInter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +41,9 @@ public class UserServiceImpl implements UserServiceInter {
             roles.add(roleRepository.findById(role.getRoleId()).orElseThrow(() -> new RuntimeException("Role not found")));
         }
         user.setRoles(roles);
+        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+        String encryptedPassword=passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPassword);
         return userRepository.save(user);
     }
 
@@ -64,5 +70,26 @@ public class UserServiceImpl implements UserServiceInter {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserEntity getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
+    @Override
+    public ResponseEntity<UserEntity> login(String username, String password) {
+        UserEntity user=userRepository.findByUsername(username).orElse(null);
+        BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+
+        if(user!=null && passwordEncoder.matches(password,user.getPassword()))
+        {
+            return ResponseEntity.ok(user);
+
+        }else
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
     }
 }

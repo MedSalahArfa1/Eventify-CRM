@@ -1,6 +1,6 @@
 package com.eventify.backend.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -13,6 +13,10 @@ public class Image {
     @Lob
     @Column(name = "picByte",columnDefinition = "LONGBLOB")
     byte [] picByte;
+
+    @OneToOne
+    @JoinTable(name="user_image")
+    private UserEntity user;
 
     @OneToOne
     @JoinTable(name="event_image")

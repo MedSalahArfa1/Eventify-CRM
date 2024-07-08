@@ -1,6 +1,8 @@
 package com.eventify.backend.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Entity
@@ -18,6 +20,7 @@ public class AddressEntity {
     private String country;
 
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private UserEntity user;
 
     @OneToOne(mappedBy = "address")

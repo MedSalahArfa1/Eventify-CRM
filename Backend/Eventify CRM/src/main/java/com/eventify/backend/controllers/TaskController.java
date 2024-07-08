@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
     @Autowired
     private TaskServiceInter taskService;

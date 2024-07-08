@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tickets")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TicketController {
     @Autowired
     private TicketServiceInter ticketService;

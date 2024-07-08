@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/addresses")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AddressController {
     @Autowired
     private AddressServiceInter addressService;

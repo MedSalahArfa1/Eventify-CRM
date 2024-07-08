@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/events")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EventController {
         @Autowired
         private EventServiceInter eventService;

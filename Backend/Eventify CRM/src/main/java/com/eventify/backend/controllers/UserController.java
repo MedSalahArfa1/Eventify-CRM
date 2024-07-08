@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     @Autowired
     private UserServiceInter userService;
@@ -39,4 +40,17 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserEntity> getUserByUsername(@PathVariable String username) {
+        UserEntity user = userService.getUserByUsername(username);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<UserEntity> loginC(@RequestParam String username,@RequestParam String password)
+    {
+        return userService.login(username,password);
+    }
+
 }

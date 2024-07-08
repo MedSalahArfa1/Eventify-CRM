@@ -1,6 +1,7 @@
 package com.eventify.backend.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import lombok.Data;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,7 +23,10 @@ public class UserEntity {
     private String email;
     private String phone;
 
-    @ManyToMany
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -31,6 +35,11 @@ public class UserEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId")
+    @JsonIgnore
     private AddressEntity address;
+
+    @JsonIgnore
+    @OneToOne
+    private Image userImage;
 
 }
