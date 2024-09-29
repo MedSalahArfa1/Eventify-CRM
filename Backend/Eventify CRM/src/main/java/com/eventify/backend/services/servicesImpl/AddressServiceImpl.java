@@ -33,7 +33,7 @@ public class AddressServiceImpl implements AddressServiceInter {
     public AddressEntity updateAddress(Long id, AddressEntity addressDetails) {
         AddressEntity address = addressRepository.findById(id).orElse(null);
         if (address != null) {
-            address.setLocation(addressDetails.getLocation());
+            address.setName(addressDetails.getName());
             address.setStreet(addressDetails.getStreet());
             address.setCity(addressDetails.getCity());
             address.setZipCode(addressDetails.getZipCode());

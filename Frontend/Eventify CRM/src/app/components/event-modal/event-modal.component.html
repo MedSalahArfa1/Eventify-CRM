@@ -1,0 +1,44 @@
+<div class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h4 class="modal-title">{{ event.eventId ? 'Edit Event' : 'Add Event' }}</h4>
+      <button type="button" class="close" (click)="onCancel()">×</button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="eventName">Event Name</label>
+          <input type="text" class="form-control" id="eventName" [(ngModel)]="event.eventName" name="eventName">
+        </div>
+        <div class="form-group">
+          <label for="eventDescription">Event Description</label>
+          <textarea class="form-control" id="eventDescription" [(ngModel)]="event.eventDescription" name="eventDescription"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="eventImage">Event Image</label>
+          <input type="file" class="form-control" id="eventImage" (change)="onFileChange($event)">
+        </div>
+        <div class="form-group">
+          <label for="totalTickets">Total Tickets</label>
+          <input type="number" class="form-control" id="totalTickets" [(ngModel)]="event.totalTickets" name="totalTickets">
+        </div>
+        <div class="form-group">
+          <label for="startDateTime">Start Date and Time</label>
+          <input type="datetime-local" class="form-control" id="startDateTime" [(ngModel)]="event.startDateTime" name="startDateTime">
+        </div>
+        <div class="form-group">
+          <label for="endDateTime">End Date and Time</label>
+          <input type="datetime-local" class="form-control" id="endDateTime" [(ngModel)]="event.endDateTime" name="endDateTime">
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input type="text" class="form-control" id="status" [(ngModel)]="event.status" name="status">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="onSave()">Save</button>
+    </div>
+  </div>
+</div>

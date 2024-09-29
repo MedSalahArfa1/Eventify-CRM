@@ -1,0 +1,56 @@
+<!-- navbar.component.html -->
+<nav *ngIf="showNavbar" class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" placement="bottom" href="index">
+        Eventify CRM
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" data-nav-image="assets/img/blurred-image-1.jpg" data-color="orange">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="explore" target="_blank">
+            <i class="now-ui-icons objects_spaceship"></i>
+            <p>Explore</p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAuthenticated()">
+          <a class="nav-link" href="profile" target="_blank">
+            <i class="now-ui-icons users_circle-08"></i>
+            <p>Profile</p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAuthenticated() && authService.hasRole(2)">
+          <a class="nav-link" href="dashboard" target="_blank">
+            <i class="now-ui-icons design_app"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        
+        <li class="nav-item" *ngIf="!authService.isAuthenticated()">
+          <a class="nav-link btn btn-neutral" href="login" target="_blank">
+            <i class="now-ui-icons arrows-1_share-66"></i>
+            <p>Login</p>
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="authService.isAuthenticated()">
+          <a class="nav-link btn btn-neutral" (click)="logout()">
+            <i class="now-ui-icons arrows-1_share-66"></i>
+            <p>Logout</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.github.com/MedSalahArfa1" target="_blank">
+            <i class="fab fa-github"></i>
+            <p class="d-lg-none d-xl-none">GitHub</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

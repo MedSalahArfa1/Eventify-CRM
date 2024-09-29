@@ -1,0 +1,26 @@
+/* Shared styles for form fields */
+.form-control {
+    color: white;
+}
+
+.input-group-prepend .input-group-text {
+    color: white;
+}
+
+.input-group-focus .input-group-text {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Placeholder styles */
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.date-label {
+    display: block;
+    text-align: center; /* Center the label text */
+    font-size: 12px; /* Make the text smaller */
+    margin-bottom: 20px; /* Add space between the date input and the label */
+    color: rgba(255, 255, 255, 0.8);
+}
+

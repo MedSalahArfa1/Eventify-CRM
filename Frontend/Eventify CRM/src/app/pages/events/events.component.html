@@ -1,0 +1,109 @@
+<div class="wrapper">
+  <div class="sidebar" data-color="red">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-panel">
+    <div class="panel-header panel-header-lg">
+      <h1 class="text-center">WELCOME BACK</h1>
+    </div>
+
+    <div class="main-content">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Events List Card -->
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-category">User's Events</h5>
+              <h4 class="card-title">
+                All Events
+                <button class="btn btn-primary float-right" (click)="openAddEventCard()">Add Event</button>
+              </h4>
+            </div>
+            <div class="card-body">
+              <div class="table-full-width table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Image</th>
+                      <th>Total Tickets</th>
+                      <th>Start Date</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let event of events">
+                      <td>{{ event.eventName }}</td>
+                      <td>{{ event.eventDescription }}</td>
+                      <td>
+                        <img [src]="event.image ? 'data:image/jpeg;base64,' + event.image.picByte : 'default-image.jpg'" 
+                             alt="{{ event.eventName }}" width="100">
+                      </td>
+                      <td>{{ event.totalTickets }}</td>
+                      <td>{{ event.startDateTime | date }}</td>
+                      <td>{{ event.endDateTime | date }}</td>
+                      <td>{{ event.status }}</td>
+                      <td class="td-actions text-right">
+                        <button class="btn btn-info btn-sm" (click)="openEditEventCard(event)">Edit</button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteEvent(event.eventId)">Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overlay Background -->
+        <div class="overlay" *ngIf="currentEvent !== null" (click)="resetForm()"></div>
+
+        <!-- Add/Edit Event Card -->
+        <div class="card edit-card" *ngIf="currentEvent !== null">
+          <div class="card-header">
+            <h5 class="card-category">{{ isAddingEvent ? 'Add Event' : 'Edit Event' }}</h5>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="saveEvent()">
+              <div class="form-group">
+                <label for="eventName">Event Name</label>
+                <input type="text" class="form-control" id="eventName" [(ngModel)]="currentEvent.eventName" name="eventName" required>
+              </div>
+              <div class="form-group">
+                <label for="eventDescription">Event Description</label>
+                <textarea class="form-control" id="eventDescription" [(ngModel)]="currentEvent.eventDescription" name="eventDescription"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="eventImage">Event Image</label>
+                <input type="file" class="form-control" id="eventImage" (change)="onFileChange($event)">
+              </div>
+              <div class="form-group">
+                <label for="totalTickets">Total Tickets</label>
+                <input type="number" class="form-control" id="totalTickets" [(ngModel)]="currentEvent.totalTickets" name="totalTickets" required>
+              </div>
+              <div class="form-group">
+                <label for="startDateTime">Start Date and Time</label>
+                <input type="datetime-local" class="form-control" id="startDateTime" [(ngModel)]="currentEvent.startDateTime" name="startDateTime" required>
+              </div>
+              <div class="form-group">
+                <label for="endDateTime">End Date and Time</label>
+                <input type="datetime-local" class="form-control" id="endDateTime" [(ngModel)]="currentEvent.endDateTime" name="endDateTime" required>
+              </div>
+              <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" [(ngModel)]="currentEvent.status" name="status">
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary me-2">{{ isAddingEvent ? 'Add Event' : 'Update Event' }}</button>
+                <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

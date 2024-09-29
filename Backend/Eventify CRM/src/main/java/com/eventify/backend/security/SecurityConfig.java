@@ -1,5 +1,6 @@
 package com.eventify.backend.security;
 
+import com.eventify.backend.entities.Rolename;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private JwtAuthEntryPoint authEntryPoint;
+
+    @Autowired
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
@@ -42,7 +45,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/roles/**").permitAll()
                 .antMatchers("/api/users/**").permitAll()
+                //.antMatchers(HttpMethod.GET, "/api/events/**").permitAll()
+                //.antMatchers(HttpMethod.POST, "/api/events/**").hasAuthority(Rolename.EVENTMANAGER.name())
+                //.antMatchers(HttpMethod.POST, "/api/image/**").hasAuthority(Rolename.EVENTMANAGER.name())
+                .antMatchers("/api/tasks/**").permitAll()
+                .antMatchers("/api/events/**").permitAll()
+                .antMatchers("/image/**").permitAll()
              //   .antMatchers("/post/**").hasAuthority(UserRoleName.ADMIN.name())
               //  .antMatchers("/image/**").hasAnyAuthority(UserRoleName.USER.name(),UserRoleName.ADMIN.name())
 

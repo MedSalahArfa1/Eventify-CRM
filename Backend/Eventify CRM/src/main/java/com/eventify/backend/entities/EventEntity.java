@@ -22,13 +22,10 @@ public class EventEntity {
     private Long eventId;
     private String eventName;
     private String eventDescription;
-    private String posterUrl;
     private int totalTickets;
     private Date startDateTime;
     private Date endDateTime;
     private String status;
-    private Date createdAt;
-    private Date updatedAt;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<TaskEntity> tasks;
@@ -49,13 +46,6 @@ public class EventEntity {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<ParticipantEntity> participants = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "event_staff",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<EventStaffEntity> eventStaffs = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId")

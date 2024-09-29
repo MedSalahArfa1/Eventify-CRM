@@ -1,0 +1,39 @@
+
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(assets/img/login.jpg)"></div>
+    <div class="container">
+        <div class="col-md-4 content-center">
+            <div class="card card-login card-plain">
+                
+                    <div class="header header-primary text-center">
+                        <div class="logo-container">
+                            <img src="assets/img/now-logo.png" alt="">
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus===true}">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Username..." [(ngModel)]="username" name="username" (blur)="focus=false" required>
+                        </div>
+                        <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1===true}">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                            </div>
+                            <input type="password" placeholder="Password..." class="form-control" [(ngModel)]="password" name="password" (blur)="focus1=false" required>
+                        </div>
+                    </div>
+                    <div class="footer text-center">
+                        <button type="submit" (click)="login()" class="btn btn-primary btn-round btn-lg btn-block">LOGIN</button>
+                    </div>
+                    <div class="pull-middle">
+                        <h6>
+                            <a href="register" class="link">Create Account</a>
+                        </h6>
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+</div>

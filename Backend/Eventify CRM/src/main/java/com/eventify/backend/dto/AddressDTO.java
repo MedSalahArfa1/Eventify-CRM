@@ -1,10 +1,13 @@
 package com.eventify.backend.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class AddressDTO {
-    private String location;
+    private String name;
     private String street;
     private String city;
     private String zipCode;

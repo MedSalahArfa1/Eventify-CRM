@@ -29,9 +29,6 @@ public class UserEntity {
     private String email;
     private String phone;
 
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -43,9 +40,5 @@ public class UserEntity {
     @JoinColumn(name = "address_id", referencedColumnName = "addressId")
     @JsonIgnore
     private AddressEntity address;
-
-    @JsonIgnore
-    @OneToOne
-    private Image userImage;
 
 }

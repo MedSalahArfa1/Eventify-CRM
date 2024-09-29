@@ -21,32 +21,22 @@ public class ImageController {
         return imageServiceInter.uploadEventImage(file,idEvent);
     }
 
-    @PostMapping("/upload/sponsor/{idSponsorship}")
-    public ResponseEntity<String> uploadSponsorLogo(@RequestParam("sponsorFile") MultipartFile file, @PathVariable Long idSponsorship) throws IOException {
-        return imageServiceInter.uploadSponsorLogo(file,idSponsorship);
-    }
-
-    @PostMapping("/upload/user/{idUser}")
-    public ResponseEntity<String> uploadUserImage(@RequestParam("userFile") MultipartFile file, @PathVariable Long idUser) throws IOException {
-        return imageServiceInter.uploadUserImage(file,idUser);
-    }
-
-    @GetMapping("/user/{idUser}")
-    public ResponseEntity<Image> getImageByUserId(@PathVariable Long idUser)
+    @GetMapping("/event/{idEvent}")
+    public ResponseEntity<Image> getImageByEventId(@PathVariable Long idEvent)
     {
-        return imageServiceInter.getUserImage(idUser);
+        return imageServiceInter.getEventImage(idEvent);
 
     }
 
-    @PutMapping("/user/{idUser}")
-    public ResponseEntity<String> updateUserImage(@RequestParam("userFile") MultipartFile file, @PathVariable Long idUser) throws IOException {
-        return imageServiceInter.updateUserImage(file, idUser);
+    @PutMapping("/event/{idEvent}")
+    public ResponseEntity<String> updateEventImage(@RequestParam("eventFile") MultipartFile file, @PathVariable Long idEvent) throws IOException {
+        return imageServiceInter.updateEventImage(file, idEvent);
     }
 
 
-    @DeleteMapping("/user/{idUser}")
-    public ResponseEntity<String> deleteUserImage(@PathVariable Long idUser)
+    @DeleteMapping("/event/{idEvent}")
+    public ResponseEntity<String> deleteEventImage(@PathVariable Long idEvent)
     {
-        return imageServiceInter.deleteUserImage(idUser);
+        return imageServiceInter.deleteEventImage(idEvent);
     }
 }

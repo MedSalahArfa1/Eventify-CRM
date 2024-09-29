@@ -10,8 +10,14 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VendorEntity extends UserEntity{
-    private String company_name;
+public class VendorEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long vendorId;
+    private String vendorName;
+    private String companyName;
+    private String email;
+    private String phone;
     private String serviceCategory;
     private String serviceDescription;
 }

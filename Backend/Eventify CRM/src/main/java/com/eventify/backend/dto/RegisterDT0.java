@@ -1,12 +1,15 @@
 package com.eventify.backend.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterDT0 {
 
     private String username;
@@ -17,8 +20,8 @@ public class RegisterDT0 {
     private String email;
     private String phone;
 
-    private AddressDTO address;
+    private AddressDTO address = new AddressDTO();
 
-    private Set<Long> roleIds;
+    private Set<RoleDTO> roles;
 
 }

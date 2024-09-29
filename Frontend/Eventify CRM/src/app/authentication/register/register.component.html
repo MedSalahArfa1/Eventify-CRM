@@ -1,0 +1,173 @@
+<div class="page-header" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(assets/img/login.jpg)"></div>
+    <div class="container">
+        <div class="col-md-8 content-center">
+            <div class="card-register card-plain-register">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="content">
+                        <!-- Personal Information -->
+                        <div class="section" style="background: transparent;box-shadow: none;">
+                            <h5>Personal Information</h5>
+                            <div class="row" style="background: transparent;box-shadow: none;">
+                                <!-- First Name, Last Name, Birth Date -->
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus1}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons users_single-02"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="First Name..." formControlName="firstName" (focus)="focus1=true" (blur)="focus1=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus2}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons users_single-02"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Last Name..." formControlName="lastName" (focus)="focus2=true" (blur)="focus2=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus3}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons ui-1_calendar-60"></i></span>
+                                        </div>
+                                        <input type="date" class="form-control" formControlName="birthDate" (focus)="focus3=true" (blur)="focus3=false" required>
+                                    </div>
+                                    <small class="date-label">Birth Date</small> <!-- Move the label here as a small element -->
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="row" style="background: transparent;box-shadow: none;">
+                                <!-- Username, Password, Confirm Password -->
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons users_circle-08"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username..." formControlName="username" (focus)="focus=true" (blur)="focus=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus4}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Password..." formControlName="password" (focus)="focus4=true" (blur)="focus4=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus5}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons ui-1_lock-circle-open"></i></span>
+                                        </div>
+                                        <input type="password" class="form-control" placeholder="Confirm Password..." formControlName="confirmPassword" (focus)="focus5=true" (blur)="focus5=false" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="section" style="background: transparent;box-shadow: none;">
+                            <h5>Contact Information</h5>
+                            <div class="row" style="background: transparent;box-shadow: none;">
+                                <div class="col-md-6">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus6}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons ui-1_email-85"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" placeholder="Email..." formControlName="email" (focus)="focus6=true" (blur)="focus6=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus7}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons tech_mobile"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Phone..." formControlName="phone" (focus)="focus7=true" (blur)="focus7=false" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Address -->
+                        <div class="section" style="background: transparent;box-shadow: none;">
+                            <h5>Address</h5>
+                            <div class="row" style="background: transparent;box-shadow: none;">
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus8}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons location_pin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Street..." formControlName="address.street" (focus)="focus8=true" (blur)="focus8=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus9}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons location_pin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="City..." formControlName="address.city" (focus)="focus9=true" (blur)="focus9=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus11}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons location_pin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Zip Code..." formControlName="address.zipCode" (focus)="focus11=true" (blur)="focus11=false" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="background: transparent;box-shadow: none;">
+                                <div class="col-md-6">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus10}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons location_pin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="State..." formControlName="address.state" (focus)="focus10=true" (blur)="focus10=false" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group form-group-no-border input-lg" [ngClass]="{'input-group-focus':focus12}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="now-ui-icons location_pin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Country..." formControlName="address.country" (focus)="focus12=true" (blur)="focus12=false" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Roles -->
+                        <div class="section" style="background: transparent;box-shadow: none;">
+                            <h5>Roles</h5>
+                            <div class="row" style="background: transparent;box-shadow: none;">
+                                <div class="col-md-3">
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" [formControl]="roles.at(1)">
+                                        <span class="form-check-sign">Event Manager</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-check">
+                                        <input class="form-check-input" type="checkbox" [formControl]="roles.at(2)">
+                                        <span class="form-check-sign">Participant</span>
+                                    </label>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="footer text-center">
+                        <button type="submit" class="btn btn-primary btn-round btn-lg btn-block">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,11 @@
 package com.eventify.backend.dto;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginDTO {
 
     private String username;

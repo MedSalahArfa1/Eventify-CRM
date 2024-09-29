@@ -33,7 +33,6 @@ public class EventServiceImpl implements EventServiceInter {
         if (event != null) {
             event.setEventName(eventDetails.getEventName());
             event.setEventDescription(eventDetails.getEventDescription());
-            event.setPosterUrl(eventDetails.getPosterUrl());
             event.setTotalTickets(eventDetails.getTotalTickets());
             event.setStartDateTime(eventDetails.getStartDateTime());
             event.setEndDateTime(eventDetails.getEndDateTime());

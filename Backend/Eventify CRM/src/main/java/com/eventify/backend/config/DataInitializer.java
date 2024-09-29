@@ -16,8 +16,6 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (roleRepository.count() == 0) {
-            Role vendorRole = new Role();
-            vendorRole.setRolename(Rolename.VENDOR);
 
             Role eventManagerRole = new Role();
             eventManagerRole.setRolename(Rolename.EVENTMANAGER);
@@ -25,13 +23,9 @@ public class DataInitializer implements CommandLineRunner {
             Role participantRole = new Role();
             participantRole.setRolename(Rolename.PARTICIPANT);
 
-            Role eventStaffRole = new Role();
-            eventStaffRole.setRolename(Rolename.EVENTSTAFF);
-
-            roleRepository.save(vendorRole);
             roleRepository.save(eventManagerRole);
             roleRepository.save(participantRole);
-            roleRepository.save(eventStaffRole);
+
         }
     }
 }

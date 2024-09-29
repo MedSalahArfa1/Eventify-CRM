@@ -1,0 +1,38 @@
+/* events.component.css */
+
+/* Styles for the add/edit card */
+.card.edit-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+/* Overlay background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 500;
+}
+
+/* Styles for the table to take the full row */
+.table-responsive {
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 0;
+}

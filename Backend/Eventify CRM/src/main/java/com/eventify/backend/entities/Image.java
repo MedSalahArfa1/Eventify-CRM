@@ -22,9 +22,4 @@ public class Image {
     @OneToOne(mappedBy = "eventImage")
     private EventEntity event;
 
-    @OneToOne(mappedBy = "userImage")
-    private UserEntity user;
-
-    @OneToOne(mappedBy = "sponsorshipImage")
-    private SponsorshipEntity sponsorship;
 }

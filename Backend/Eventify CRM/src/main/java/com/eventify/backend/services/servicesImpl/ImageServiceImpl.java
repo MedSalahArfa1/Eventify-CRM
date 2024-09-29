@@ -2,11 +2,8 @@ package com.eventify.backend.services.servicesImpl;
 
 import com.eventify.backend.entities.EventEntity;
 import com.eventify.backend.entities.Image;
-import com.eventify.backend.entities.SponsorshipEntity;
-import com.eventify.backend.entities.UserEntity;
 import com.eventify.backend.repositories.EventRepository;
 import com.eventify.backend.repositories.ImageRepository;
-import com.eventify.backend.repositories.SponsorshipRepository;
 import com.eventify.backend.repositories.UserRepository;
 import com.eventify.backend.services.servicesInter.ImageServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +25,6 @@ public class ImageServiceImpl implements ImageServiceInter {
     ImageRepository imageRepository;
     @Autowired
     EventRepository eventRepository;
-    @Autowired
-    SponsorshipRepository sponsorshipRepository;
-    @Autowired
-    UserRepository userRepository;
 
     @Override
     public ResponseEntity<String> uploadEventImage(MultipartFile file, Long idEvent) throws IOException {
@@ -53,49 +46,9 @@ public class ImageServiceImpl implements ImageServiceInter {
     }
 
     @Override
-    public ResponseEntity<String> uploadSponsorLogo(MultipartFile file, Long idSponsorship) throws IOException {
-        Optional<SponsorshipEntity> sponsorshipOptional=sponsorshipRepository.findById(idSponsorship);
-        if(sponsorshipOptional.isPresent())
-        {
-            if(sponsorshipOptional.get().getSponsorshipImage()!=null){
-                return ResponseEntity.badRequest().body("Sponsor already has an logo");
+    public ResponseEntity<Image> getEventImage(Long idEvent) {
 
-            }
-            Image img =new Image();
-            img.setName(file.getOriginalFilename());
-            img.setPicByte(compressBytes(file.getBytes()));
-            img.setSponsorship(sponsorshipOptional.get());
-            imageRepository.save(img);
-            return ResponseEntity.ok("Image( "+img.getName()+" ) added to sponsor "+ sponsorshipOptional.get().getSponsorName());
-        }else{
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<String> uploadUserImage(MultipartFile file, Long idUser) throws IOException {
-        Optional<UserEntity> userOptional=userRepository.findById(idUser);
-        if(userOptional.isPresent())
-        {
-            if(userOptional.get().getUserImage()!=null){
-                return ResponseEntity.badRequest().body("User already has an image");
-
-            }
-            Image img =new Image();
-            img.setName(file.getOriginalFilename());
-            img.setPicByte(compressBytes(file.getBytes()));
-            img.setUser(userOptional.get());
-            imageRepository.save(img);
-            return ResponseEntity.ok("Image( "+img.getName()+" ) added to user "+ userOptional.get().getUsername());
-        }else{
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @Override
-    public ResponseEntity<Image> getUserImage(Long idUser) {
-
-        Optional<Image> retrievedImage = imageRepository.findByUserUserId(idUser);
+        Optional<Image> retrievedImage = imageRepository.findByEventEventId(idEvent);
         if(retrievedImage.isPresent())
         {
             Image img =retrievedImage.get();
@@ -107,12 +60,12 @@ public class ImageServiceImpl implements ImageServiceInter {
     }
 
     @Override
-    public ResponseEntity<String> updateUserImage(MultipartFile file, Long idUser) throws IOException {
-        Optional<UserEntity> optionalUser=userRepository.findById(idUser);
-        if(optionalUser.isPresent())
+    public ResponseEntity<String> updateEventImage(MultipartFile file, Long idEvent) throws IOException {
+        Optional<EventEntity> optionalEvent=eventRepository.findById(idEvent);
+        if(optionalEvent.isPresent())
         {
-            UserEntity user =optionalUser.get();
-            Image image=user.getUserImage();
+            EventEntity user =optionalEvent.get();
+            Image image=user.getEventImage();
             image.setName(file.getOriginalFilename());
             image.setPicByte(file.getBytes());
             imageRepository.save(image);
@@ -123,16 +76,16 @@ public class ImageServiceImpl implements ImageServiceInter {
     }
 
     @Override
-    public ResponseEntity<String> deleteUserImage(Long idUser) {
+    public ResponseEntity<String> deleteEventImage(Long idEvent) {
 
-        Optional<UserEntity> optionalUser=userRepository.findById(idUser);
-        if(optionalUser.isPresent())
+        Optional<EventEntity> optionalEvent=eventRepository.findById(idEvent);
+        if(optionalEvent.isPresent())
         {
-            UserEntity user=optionalUser.get();
-            Image img = user.getUserImage();
+            EventEntity event=optionalEvent.get();
+            Image img = event.getEventImage();
             if(img!=null){
                 imageRepository.delete(img);
-                return ResponseEntity.ok("Image deleted of user"+idUser);
+                return ResponseEntity.ok("Image deleted of user"+idEvent);
             }else{
                 return ResponseEntity.notFound().build();
             }

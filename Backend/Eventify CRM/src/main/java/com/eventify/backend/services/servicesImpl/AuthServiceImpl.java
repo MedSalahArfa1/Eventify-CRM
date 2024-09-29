@@ -105,7 +105,7 @@ public class AuthServiceImpl implements AuthServiceInter {
         AddressDTO addressDTO = registerDTO.getAddress();
         if (addressDTO != null) {
             AddressEntity address = new AddressEntity();
-            address.setLocation(addressDTO.getLocation());
+            address.setName(addressDTO.getName());
             address.setStreet(addressDTO.getStreet());
             address.setCity(addressDTO.getCity());
             address.setState(addressDTO.getState());
