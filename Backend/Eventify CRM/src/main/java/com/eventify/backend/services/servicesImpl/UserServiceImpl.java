@@ -1,5 +1,8 @@
 package com.eventify.backend.services.servicesImpl;
 
+import com.eventify.backend.dto.RegisterDT0;
+import com.eventify.backend.dto.RoleDTO;
+import com.eventify.backend.entities.AddressEntity;
 import com.eventify.backend.entities.Role;
 import com.eventify.backend.entities.UserEntity;
 import com.eventify.backend.repositories.RoleRepository;
@@ -8,8 +11,9 @@ import com.eventify.backend.services.servicesInter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,7 +27,8 @@ public class UserServiceImpl implements UserServiceInter {
     @Autowired
     private RoleRepository roleRepository;
 
-    Set<Role> roles = new HashSet<>();
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserEntity> getAllUsers() {
@@ -37,13 +42,12 @@ public class UserServiceImpl implements UserServiceInter {
 
     @Override
     public UserEntity createUser(UserEntity user) {
+        Set<Role> roles = new HashSet<>();
         for (Role role : user.getRoles()) {
             roles.add(roleRepository.findById(role.getRoleId()).orElseThrow(() -> new RuntimeException("Role not found")));
         }
         user.setRoles(roles);
-        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-        String encryptedPassword=passwordEncoder.encode(user.getPassword());
-        user.setPassword(encryptedPassword);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -55,9 +59,10 @@ public class UserServiceImpl implements UserServiceInter {
             user.setFirstName(userDetails.getFirstName());
             user.setLastName(userDetails.getLastName());
             user.setBirthDate(userDetails.getBirthDate());
-            user.setPassword(userDetails.getPassword());
+            user.setPassword(passwordEncoder.encode(userDetails.getPassword()));
             user.setEmail(userDetails.getEmail());
             user.setPhone(userDetails.getPhone());
+            Set<Role> roles = new HashSet<>();
             for (Role role : userDetails.getRoles()) {
                 roles.add(roleRepository.findById(role.getRoleId()).orElseThrow(() -> new RuntimeException("Role not found")));
             }
@@ -77,19 +82,37 @@ public class UserServiceImpl implements UserServiceInter {
         return userRepository.findByUsername(username).orElse(null);
     }
 
+
+
     @Override
-    public ResponseEntity<UserEntity> login(String username, String password) {
-        UserEntity user=userRepository.findByUsername(username).orElse(null);
-        BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+    public ResponseEntity<UserEntity> registerUser(RegisterDT0 registerDTO) {
+        UserEntity user = new UserEntity();
+        user.setUsername(registerDTO.getUsername());
+        user.setFirstName(registerDTO.getFirstName());
+        user.setLastName(registerDTO.getLastName());
+        user.setBirthDate(registerDTO.getBirthDate());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        user.setEmail(registerDTO.getEmail());
+        user.setPhone(registerDTO.getPhone());
 
-        if(user!=null && passwordEncoder.matches(password,user.getPassword()))
-        {
-            return ResponseEntity.ok(user);
+        AddressEntity address = new AddressEntity();
+        address.setStreet(registerDTO.getAddress().getStreet());
+        address.setCity(registerDTO.getAddress().getCity());
+        address.setZipCode(registerDTO.getAddress().getZipCode());
+        address.setState(registerDTO.getAddress().getState());
+        address.setCountry(registerDTO.getAddress().getCountry());
+        user.setAddress(address);
 
-        }else
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        // Process roles
+        Set<Role> roles = new HashSet<>();
+        for (RoleDTO roleDTO : registerDTO.getRoles()) {
+            Role role = roleRepository.findById(roleDTO.getRoleId())
+                    .orElseThrow(() -> new RuntimeException("Error: Role not found."));
+            roles.add(role);
         }
+        user.setRoles(roles);
 
+        userRepository.save(user);
+        return ResponseEntity.ok(user);
     }
 }

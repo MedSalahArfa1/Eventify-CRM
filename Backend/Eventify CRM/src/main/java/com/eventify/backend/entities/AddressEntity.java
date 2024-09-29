@@ -1,12 +1,16 @@
 package com.eventify.backend.entities;
 
+//import jakarta.persistence.*;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "address")
 public class AddressEntity {
     @Id

@@ -1,14 +1,20 @@
 package com.eventify.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
+//import jakarta.persistence.*;
 import javax.persistence.*;
-import lombok.Data;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "events")
 public class EventEntity {
     @Id
@@ -25,7 +31,7 @@ public class EventEntity {
     private Date updatedAt;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private Set<TaskEntity> tasks = new HashSet<>();
+    private List<TaskEntity> tasks;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private Set<FeedbackEntity> feedbacks = new HashSet<>();

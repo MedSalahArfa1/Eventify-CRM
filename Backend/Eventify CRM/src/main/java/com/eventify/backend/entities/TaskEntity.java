@@ -1,27 +1,32 @@
 package com.eventify.backend.entities;
 
+//import jakarta.persistence.*;
 import javax.persistence.*;
-import lombok.Data;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tasks")
 public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
-    private String taskName;
     private String taskDescription;
     private Date deadline;
-    private String status;
+    private int status;
+    private String assignee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", nullable = false)
+    @JsonBackReference
     private EventEntity event;
-
-    @ManyToOne
-    @JoinColumn(name = "assigned_by", nullable = false)
-    private UserEntity assignedBy;
 }

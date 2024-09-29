@@ -1,9 +1,8 @@
 package com.eventify.backend.entities;
 
-import javax.persistence.Entity;
-import lombok.Data;
+//import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
-@Data
 public class EventManagerEntity extends UserEntity {
 }

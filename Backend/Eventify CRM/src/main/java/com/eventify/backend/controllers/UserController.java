@@ -47,10 +47,5 @@ public class UserController {
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<UserEntity> loginC(@RequestParam String username,@RequestParam String password)
-    {
-        return userService.login(username,password);
-    }
 
 }

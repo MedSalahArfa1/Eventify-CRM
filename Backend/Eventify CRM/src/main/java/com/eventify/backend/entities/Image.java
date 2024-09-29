@@ -1,28 +1,30 @@
 package com.eventify.backend.entities;
 
+//import jakarta.persistence.*;
 import javax.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String name;
+
     @Lob
-    @Column(name = "picByte",columnDefinition = "LONGBLOB")
-    byte [] picByte;
+    @Column(name = "picByte", columnDefinition = "LONGBLOB")
+    private byte[] picByte;
 
-    @OneToOne
-    @JoinTable(name="user_image")
-    private UserEntity user;
-
-    @OneToOne
-    @JoinTable(name="event_image")
+    @OneToOne(mappedBy = "eventImage")
     private EventEntity event;
 
-    @OneToOne
-    @JoinTable(name="sponsor_logo")
+    @OneToOne(mappedBy = "userImage")
+    private UserEntity user;
+
+    @OneToOne(mappedBy = "sponsorshipImage")
     private SponsorshipEntity sponsorship;
 }

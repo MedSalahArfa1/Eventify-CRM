@@ -1,5 +1,6 @@
 package com.eventify.backend.services.servicesInter;
 
+import com.eventify.backend.dto.RegisterDT0;
 import com.eventify.backend.entities.UserEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -11,6 +12,9 @@ public interface UserServiceInter{
     UserEntity createUser(UserEntity user);
     UserEntity updateUser(Long id, UserEntity userDetails);
     void deleteUser(Long id);
-    ResponseEntity<UserEntity> login(String username, String password);
+    //ResponseEntity<UserEntity> login(String username, String password);
     UserEntity getUserByUsername(String username);
+
+
+    ResponseEntity<UserEntity> registerUser(RegisterDT0 registerDTO);
 }

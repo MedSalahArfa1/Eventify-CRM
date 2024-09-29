@@ -1,12 +1,18 @@
 package com.eventify.backend.entities;
 
+//import jakarta.persistence.*;
 import javax.persistence.*;
-import lombok.Data;
+
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
-@Data
-@Table(name = "tasks")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "feedbacks")
 public class FeedbackEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

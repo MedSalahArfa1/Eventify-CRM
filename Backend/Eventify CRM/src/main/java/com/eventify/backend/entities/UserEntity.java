@@ -1,14 +1,20 @@
 package com.eventify.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+//import jakarta.persistence.*;
 import javax.persistence.*;
-import lombok.Data;
+
+import lombok.*;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users")
 public class UserEntity {
 
@@ -33,7 +39,7 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId")
     @JsonIgnore
     private AddressEntity address;
