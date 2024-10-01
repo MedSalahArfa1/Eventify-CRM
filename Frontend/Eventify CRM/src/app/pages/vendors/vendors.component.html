@@ -1,0 +1,119 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="red">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-panel">
+  
+      <div class="main-content" style="margin-top: 100px;">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Vendors List Card -->
+            <div class="card card-vendors">
+              <div class="card-header">
+                <h5 class="card-category">Vendors Management</h5>
+                <h4 class="card-title">
+                  Vendors
+                  <button class="btn btn-primary float-right" (click)="openAddVendorCard()">Add Vendor</button>
+                </h4>
+              </div>
+              <div class="card-body">
+                <div class="search-container">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search by vendor name"
+                    [(ngModel)]="searchQuery"
+                    (ngModelChange)="filterVendors()"
+                  />
+                </div>
+                <div class="table-full-width table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Vendor Name</th>
+                        <th>Company Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Service Category</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let vendor of filteredVendors">
+                        <td>{{ vendor.vendorName }}</td>
+                        <td>{{ vendor.companyName }}</td>
+                        <td>{{ vendor.email }}</td>
+                        <td>{{ vendor.phone }}</td>
+                        <td>{{ vendor.serviceCategory }}</td>
+                        <td class="td-actions text-right">
+                          <button 
+                            class="btn btn-info btn-sm" 
+                            (click)="openEditVendorCard(vendor)">
+                            Edit
+                          </button>
+                          <button 
+                            class="btn btn-danger btn-sm" 
+                            (click)="deleteVendor(vendor.vendorId)">
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="stats">
+                  <i class="now-ui-icons loader_refresh spin"></i> Updated just now
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Overlay Background -->
+    <div class="overlay" *ngIf="currentVendor !== null" (click)="resetForm()"></div>
+  
+    <!-- Add/Edit Vendor Card -->
+    <div class="card edit-card" *ngIf="currentVendor !== null">
+      <div class="card-header">
+        <h5 class="card-category">{{ isAddingVendor ? 'Add Vendor' : 'Edit Vendor' }}</h5>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="isAddingVendor ? addVendor() : updateVendor()">
+          <div class="form-group">
+            <label for="vendorName">Vendor Name</label>
+            <input type="text" class="form-control" id="vendorName" [(ngModel)]="currentVendor.vendorName" name="vendorName" required>
+          </div>
+          <div class="form-group">
+            <label for="companyName">Company Name</label>
+            <input type="text" class="form-control" id="companyName" [(ngModel)]="currentVendor.companyName" name="companyName" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="currentVendor.email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" [(ngModel)]="currentVendor.phone" name="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="serviceCategory">Service Category</label>
+            <select id="serviceCategory" [(ngModel)]="currentVendor.serviceCategory" name="serviceCategory" class="form-control">
+                <option *ngFor="let category of serviceCategories" [value]="category">{{ category }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="serviceDescription">Service Description</label>
+            <textarea class="form-control" id="serviceDescription" [(ngModel)]="currentVendor.serviceDescription" name="serviceDescription" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">{{ isAddingVendor ? 'Add Vendor' : 'Update Vendor' }}</button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

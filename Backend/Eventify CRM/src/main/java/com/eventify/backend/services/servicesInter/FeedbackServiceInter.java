@@ -3,15 +3,12 @@ package com.eventify.backend.services.servicesInter;
 import com.eventify.backend.entities.FeedbackEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FeedbackServiceInter {
     List<FeedbackEntity> getAllFeedbacks();
-
-    FeedbackEntity getFeedbackById(Long id);
-
+    Optional<FeedbackEntity> getFeedbackById(Long feedbackId);
     FeedbackEntity createFeedback(FeedbackEntity feedback);
-
-    FeedbackEntity updateFeedback(Long id, FeedbackEntity feedbackDetails);
-
-    void deleteFeedback(Long id);
+    FeedbackEntity updateFeedback(Long feedbackId, FeedbackEntity feedback);
+    void deleteFeedback(Long feedbackId);
 }

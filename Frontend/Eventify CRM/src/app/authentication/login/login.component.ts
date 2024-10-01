@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         const accessToken = response.accessToken;
         localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('roles', JSON.stringify(response.roles));
 
         console.log('Login successful:', response);
         alert('Login successful!');

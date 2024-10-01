@@ -3,17 +3,14 @@
     <app-sidebar></app-sidebar>
   </div>
   <div class="main-panel">
-    <div class="panel-header panel-header-lg">
-      <h1 class="text-center">TASKS</h1>
-    </div>
 
-    <div class="main-content" *ngIf="isEventManager">
+    <div class="main-content" style="margin-top: 100px;">
       <div class="row">
         <div class="col-md-12">
           <!-- Tasks List Card -->
           <div class="card card-tasks">
             <div class="card-header">
-              <h5 class="card-category">Backend development</h5>
+              <h5 class="card-category">User's Tasks</h5>
               <h4 class="card-title">
                 Tasks
                 <button class="btn btn-primary float-right" (click)="openAddTaskCard()">Add Task</button>

@@ -23,3 +23,14 @@
 .event-item h4 {
   margin-top: 0;
 }
+
+.event-item {
+  margin-bottom: 20px; /* Space between events */
+}
+
+.event-image {
+  width: 100%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 300px; /* Limit the height if needed */
+  object-fit: cover; /* Cover the area without distortion */
+}

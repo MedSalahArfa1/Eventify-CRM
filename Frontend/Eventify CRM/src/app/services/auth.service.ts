@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(loginData: { username: string; password: string }): Observable<any> {
-
-    return this.http.post<any>(this.apiUrl + "/login", loginData);
+    return this.http.post<any>(this.apiUrl + "/login", loginData).pipe(
+      tap(response => {
+        if (response && response.accessToken) {
+          localStorage.setItem('accessToken', response.accessToken);
+          localStorage.setItem('roles', JSON.stringify(response.roles)); // Store roles
+          localStorage.setItem('userId', response.user.userId);
+          this.roles = response.roles; // Set roles locally as well
+        }
+      })
+    );
   }
 
   register(formValues: any): Observable<any> {
@@ -22,13 +30,13 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     localStorage.removeItem('roles');
     this.roles = [];
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('accessToken');
   }
 
   private getRoles(): number[] {
@@ -44,4 +52,16 @@ export class AuthService {
     return roleIds.some(roleId => this.hasRole(roleId));
   }
 
+  // New method to get user profile using the access token
+  getUserDetails(): Observable<any> {
+    const token = localStorage.getItem('accessToken');
+    const userId = localStorage.getItem('userId');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`http://localhost:8082/api/users/${userId}`, { headers });
+  }
+
+  getUserId(): number | null {
+    return localStorage.getItem('userId') ? +localStorage.getItem('userId') : null; // Convert to number or return null
+  }
+  
 }

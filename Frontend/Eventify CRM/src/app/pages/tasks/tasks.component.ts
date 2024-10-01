@@ -22,7 +22,7 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private tasksService: TaskService, 
-    private authService: AuthService,
+    
     private router: Router
   ) { }
 
@@ -139,7 +139,7 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(taskId: number | null): void {
-    if (taskId !== null) {
+    if (confirm("Are you sure you want to delete this task?")) {
       this.tasksService.deleteTask(taskId).subscribe(() => {
         this.loadTasks();  
       }, error => {
@@ -182,8 +182,4 @@ export class TasksComponent implements OnInit {
     return task.status === 0 && task.deadline < now;
   }
 
-  // Getter for authService
-  get isEventManager(): boolean {
-    return this.authService.hasAnyRole([2]);
-  }
 }

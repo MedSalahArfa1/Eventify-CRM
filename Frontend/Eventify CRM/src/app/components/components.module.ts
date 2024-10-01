@@ -16,6 +16,7 @@ import { NgbdModalBasic } from './modal/modal.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EventModalComponent } from './event-modal/event-modal.component';
+import { FeedbackPopupComponent } from './feedback-popup/feedback-popup.component';
 
 
 @NgModule({
@@ -38,14 +39,14 @@ import { EventModalComponent } from './event-modal/event-modal.component';
         FooterComponent,
         SidebarComponent,
         NavbarComponent,
-        EventModalComponent
+        EventModalComponent,
     ],
     exports:[ 
         ComponentsComponent,
         FooterComponent,
         SidebarComponent,
         NavbarComponent,
-        EventModalComponent
+        EventModalComponent,
     ]
 })
 export class ComponentsModule { }

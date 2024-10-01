@@ -3,6 +3,7 @@ package com.eventify.backend.entities;
 //import jakarta.persistence.*;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.Date;
@@ -26,6 +27,7 @@ public class FeedbackEntity {
     private EventEntity event;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "left_by", nullable = false)
     private UserEntity leftBy;
 

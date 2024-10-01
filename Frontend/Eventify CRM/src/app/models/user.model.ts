@@ -22,4 +22,14 @@ export interface RegisterDTO {
   address: Address;
   roles: Role[];
 }
-  
+
+export interface ProfileDTO {
+  userId: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  birthDate: Date;
+  email: string;
+  phone: string;
+  roles: Role[];
+}

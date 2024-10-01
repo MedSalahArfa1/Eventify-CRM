@@ -3,11 +3,8 @@
     <app-sidebar></app-sidebar>
   </div>
   <div class="main-panel">
-    <div class="panel-header panel-header-lg">
-      <h1 class="text-center">WELCOME BACK</h1>
-    </div>
 
-    <div class="main-content">
+    <div class="main-content" style="margin-top: 100px;">
       <div class="row">
         <div class="col-md-12">
           <!-- Events List Card -->
@@ -15,7 +12,7 @@
             <div class="card-header">
               <h5 class="card-category">User's Events</h5>
               <h4 class="card-title">
-                All Events
+                Events
                 <button class="btn btn-primary float-right" (click)="openAddEventCard()">Add Event</button>
               </h4>
             </div>
@@ -24,6 +21,7 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      
                       <th>Name</th>
                       <th>Description</th>
                       <th>Image</th>
@@ -39,8 +37,8 @@
                       <td>{{ event.eventName }}</td>
                       <td>{{ event.eventDescription }}</td>
                       <td>
-                        <img [src]="event.image ? 'data:image/jpeg;base64,' + event.image.picByte : 'default-image.jpg'" 
-                             alt="{{ event.eventName }}" width="100">
+                        <img *ngIf="event.imagePreview" [src]="event.imagePreview" alt="Event Image" />
+                        <span *ngIf="!event.imagePreview">No Image</span>
                       </td>
                       <td>{{ event.totalTickets }}</td>
                       <td>{{ event.startDateTime | date }}</td>
@@ -78,7 +76,8 @@
               </div>
               <div class="form-group">
                 <label for="eventImage">Event Image</label>
-                <input type="file" class="form-control" id="eventImage" (change)="onFileChange($event)">
+                <input type="file" (change)="onImageSelected($event)" accept="image/jpeg, image/png" />
+                <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" />
               </div>
               <div class="form-group">
                 <label for="totalTickets">Total Tickets</label>

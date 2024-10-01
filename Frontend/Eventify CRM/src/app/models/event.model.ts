@@ -1,4 +1,4 @@
-// src/app/models/event.model.ts
+
 export interface Event {
   eventId: number | null;
   eventName: string;
@@ -8,6 +8,7 @@ export interface Event {
   endDateTime: Date;
   status: string;
   eventImage?: EventImage;
+  imagePreview?: string;
 }
 
 export interface EventImage { 

@@ -17,6 +17,8 @@ import { EventsComponent } from './pages/events/events.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { ExploreComponent } from './pages/explore/explore.component';
 import { AuthService } from './services/auth.service';
+import { VendorsComponent } from './pages/vendors/vendors.component';
+import { FeedbackPopupComponent } from './components/feedback-popup/feedback-popup.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { AuthService } from './services/auth.service';
         DashboardComponent,
         EventsComponent,
         TasksComponent,
-        ExploreComponent
+        ExploreComponent,
+        VendorsComponent,
+        FeedbackPopupComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -39,7 +43,7 @@ import { AuthService } from './services/auth.service';
         ComponentsModule,
         HttpClientModule,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
         
     ],
     providers: [],

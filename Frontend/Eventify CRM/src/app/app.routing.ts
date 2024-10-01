@@ -15,6 +15,7 @@ import { TasksComponent } from './pages/tasks/tasks.component';
 import { ExploreComponent } from './pages/explore/explore.component';
 import { RoleGuard } from './guards/Role.guard';
 import { AuthGuard } from './guards/Auth.guard';
+import { VendorsComponent } from './pages/vendors/vendors.component';
 
 
 const routes: Routes =[
@@ -28,7 +29,8 @@ const routes: Routes =[
     { path: 'dashboard', component: DashboardComponent},
     { path: 'events', component: EventsComponent},
     { path: 'tasks', component: TasksComponent},
-    { path: 'explore', component: ExploreComponent}
+    { path: 'explore', component: ExploreComponent},
+    { path: 'vendors', component: VendorsComponent}
 
 ];
 

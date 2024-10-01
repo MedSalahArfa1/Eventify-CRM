@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ProfileDTO } from 'app/models/user.model';
+import { AuthService } from 'app/services/auth.service';
 import * as Rellax from 'rellax';
 
 @Component({
@@ -6,30 +9,41 @@ import * as Rellax from 'rellax';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-  zoom: number = 14;
-  lat: number = 44.445248;
-  lng: number = 26.099672;
-  styles: any[] = [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}];
-    data : Date = new Date();
-    focus;
-    focus1;
+export class ProfileComponent implements OnInit, OnDestroy {
+  profileForm: FormGroup;
+  user: ProfileDTO;
 
-    constructor() { }
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    // Initialize the profile form in the constructor
+    this.profileForm = this.fb.group({
+      firstName: [''],
+      lastName: [''],
+      email: [''],
+      phone: [''],
+      birthDate: [''],
+    });
+  }
 
-    ngOnInit() {
-      var rellaxHeader = new Rellax('.rellax-header');
+  ngOnInit() {
+    this.getUserDetails(); // Fetch user data on component load
+    new Rellax('.rellax-header'); // Initialize Rellax for the header
 
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.add('profile-page');
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.add('navbar-transparent');
-    }
-    ngOnDestroy(){
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.remove('profile-page');
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.remove('navbar-transparent');
-    }
+    // Add classes to body and navbar for styling
+    document.body.classList.add('profile-page');
+    document.getElementsByTagName('nav')[0].classList.add('navbar-transparent');
+  }
 
+  ngOnDestroy() {
+    // Clean up by removing classes when the component is destroyed
+    document.body.classList.remove('profile-page');
+    document.getElementsByTagName('nav')[0].classList.remove('navbar-transparent');
+  }
+
+  // Fetch the user's details from the service
+  getUserDetails() {
+    this.authService.getUserDetails().subscribe((data: ProfileDTO) => {
+      this.user = data;
+      this.profileForm.patchValue(data); // Populate the form with user data
+    });
+  }
 }

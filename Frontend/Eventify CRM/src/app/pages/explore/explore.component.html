@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <div class="page-header page-header-small">
+    <div class="page-header page-header-small" filter-color="orange">
         <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/bg6.jpg');">
         </div>
         <div class="container">
@@ -27,7 +27,20 @@
             <p>{{ event.eventDescription }}</p>
             <p><strong>Start Date:</strong> {{ event.startDateTime | date }}</p>
             <p><strong>End Date:</strong> {{ event.endDateTime | date }}</p>
+            <img *ngIf="getImageUrl(event.eventId)" [src]="getImageUrl(event.eventId)" alt="Event Image" />
+             <!-- Feedback Button -->
+        <button class="btn btn-primary" (click)="openFeedbackPopup(event.eventId)">
+          Add Feedback
+        </button>
           </div>
         </div>
     </div>
+  <!-- Feedback Popup Component -->
+  <app-feedback-popup
+  *ngIf="showFeedbackPopup"
+  [show]="showFeedbackPopup"
+  [eventId]="selectedEventId"
+  (close)="closeFeedbackPopup()"
+  (feedbackAdded)="handleFeedbackAdded()"
+></app-feedback-popup>
 </div>

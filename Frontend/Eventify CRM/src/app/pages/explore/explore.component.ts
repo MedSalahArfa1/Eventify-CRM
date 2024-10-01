@@ -1,7 +1,8 @@
-// explore.component.ts
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'app/services/event.service'; // Adjust the import path as necessary
-import { Event } from 'app/models/event.model'; // Adjust the import path as necessary
+import { Event, EventImage } from 'app/models/event.model'; // Adjust the import path as necessary
+import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-explore',
@@ -12,8 +13,11 @@ export class ExploreComponent implements OnInit {
   events: Event[] = [];
   filteredEvents: Event[] = [];
   searchQuery: string = '';
+  eventImages: { [key: number]: string } = {}; // Store images for events
+  showFeedbackPopup = false;
+  selectedEventId: number | null = null;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loadEvents();
@@ -23,6 +27,7 @@ export class ExploreComponent implements OnInit {
     this.eventService.getEvents().subscribe(events => {
       this.events = events;
       this.filteredEvents = events; // Initially display all events
+      this.loadEventImages(); // Load images after events are loaded
     });
   }
 
@@ -35,5 +40,37 @@ export class ExploreComponent implements OnInit {
         event.eventName.toLowerCase().includes(query)
       );
     }
+  }
+
+  loadEventImages(): void {
+    this.filteredEvents.forEach(event => {
+      this.eventService.getEventImage(event.eventId!).subscribe((image: EventImage) => {
+        // Convert byte array to Base64 string
+        const base64String = btoa(String.fromCharCode.apply(null, image.picByte)); // Use apply instead of spread
+        this.eventImages[event.eventId!] = `data:image/jpeg;base64,${base64String}`; // Adjust content type as needed
+      });
+    });
+  }
+
+  getImageUrl(eventId: number): string {
+    return this.eventImages[eventId]; // Return the image URL from the loaded images
+  }
+
+  openFeedbackPopup(eventId: number) {
+    if (this.authService.isAuthenticated()) {
+      this.selectedEventId = eventId;
+      this.showFeedbackPopup = true;
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  closeFeedbackPopup() {
+    this.showFeedbackPopup = false;
+    this.selectedEventId = null;
+  }
+
+  handleFeedbackAdded() {
+    this.loadEvents(); // Refresh the events list or handle UI updates as needed
   }
 }

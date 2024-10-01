@@ -1,0 +1,31 @@
+<div class="popup-overlay" *ngIf="show">
+    <div class="popup-content">
+      <h2>Add Feedback</h2>
+      <form (ngSubmit)="onSubmit()" #feedbackForm="ngForm">
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <select class="form-control" [(ngModel)]="feedbackData.rating" name="rating" required>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3">3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="comments">Comments</label>
+          <textarea
+            class="form-control"
+            [(ngModel)]="feedbackData.comments"
+            name="comments"
+            rows="3"
+            placeholder="Enter your comments"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="feedbackForm.invalid">Submit</button>
+        <button type="button" class="btn btn-danger" (click)="closePopup()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  
