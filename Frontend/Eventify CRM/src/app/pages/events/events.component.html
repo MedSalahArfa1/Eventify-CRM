@@ -17,9 +17,18 @@
               </h4>
             </div>
             <div class="card-body">
+              <div class="search-container">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search by event name"
+                  [(ngModel)]="searchQuery"
+                  (input)="filterEvents()"
+                />
+              </div>
               <div class="table-full-width table-responsive">
                 <table class="table">
-                  <thead>
+                  <thead class="text-primary">
                     <tr>
                       
                       <th>Name</th>
@@ -44,9 +53,9 @@
                       <td>{{ event.startDateTime | date }}</td>
                       <td>{{ event.endDateTime | date }}</td>
                       <td>{{ event.status }}</td>
-                      <td class="td-actions text-right">
-                        <button class="btn btn-info btn-sm" (click)="openEditEventCard(event)">Edit</button>
-                        <button class="btn btn-danger btn-sm" (click)="deleteEvent(event.eventId)">Delete</button>
+                      <td class="td-actions text-center">
+                        <button class="btn btn-neutral btn-sm" (click)="openEditEventCard(event)"><i class="now-ui-icons ui-2_settings-90"></i></button>
+                        <button class="btn btn-neutral btn-sm" (click)="deleteEvent(event.eventId)"><i class="now-ui-icons ui-1_simple-remove"></i></button>
                       </td>
                     </tr>
                   </tbody>
@@ -104,5 +113,4 @@
         </div>
       </div>
     </div>
-  </div>
 </div>

@@ -25,8 +25,8 @@ export class ExploreComponent implements OnInit {
 
   loadEvents(): void {
     this.eventService.getEvents().subscribe(events => {
-      this.events = events;
-      this.filteredEvents = events; // Initially display all events
+      this.events = events.sort((a, b) => new Date(b.startDateTime!).getTime() - new Date(a.startDateTime!).getTime()); // Sort events by start date
+      this.filteredEvents = this.events; // Initially display all events
       this.loadEventImages(); // Load images after events are loaded
     });
   }

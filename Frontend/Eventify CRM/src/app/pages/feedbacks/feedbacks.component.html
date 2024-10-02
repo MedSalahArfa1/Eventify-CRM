@@ -1,0 +1,76 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="red">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-panel">
+      <div class="main-content" style="margin-top: 100px;">
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Feedback List Card -->
+            <div class="card card-feedbacks">
+              <div class="card-header">
+                <h5 class="card-category">Users Feedbacks</h5>
+                <h4 class="card-title">Feedbacks</h4>
+              </div>
+              <div class="card-body">
+                <div class="search-container">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search by event name"
+                    [(ngModel)]="searchQuery"
+                    (ngModelChange)="filterFeedbacks()"
+                  />
+                </div>
+                <div class="table-full-width table-responsive">
+                  <table class="table">
+                    <thead class="text-primary">
+                      <tr>
+                        <th>Rating</th>
+                        <th>Comments</th>
+                        <th>Event Name</th>
+                        <th>Left By</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>5</td>
+                        <td>Amazing event! Had a great time.</td>
+                        <td>Community Cleanup</td>
+                        <td>John Doe</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Very informative and well organized.</td>
+                        <td>Tech Conference</td>
+                        <td>Jane Smith</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>It was okay, but could be improved.</td>
+                        <td>Art Exhibition</td>
+                        <td>Michael Brown</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Not what I expected.</td>
+                        <td>Charity Gala</td>
+                        <td>Emily Johnson</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>I did not enjoy this event.</td>
+                        <td>Sports Day</td>
+                        <td>Chris Lee</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

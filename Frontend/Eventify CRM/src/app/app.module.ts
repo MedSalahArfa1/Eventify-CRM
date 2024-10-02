@@ -19,6 +19,7 @@ import { ExploreComponent } from './pages/explore/explore.component';
 import { AuthService } from './services/auth.service';
 import { VendorsComponent } from './pages/vendors/vendors.component';
 import { FeedbackPopupComponent } from './components/feedback-popup/feedback-popup.component';
+import { FeedbacksComponent } from './pages/feedbacks/feedbacks.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { FeedbackPopupComponent } from './components/feedback-popup/feedback-pop
         TasksComponent,
         ExploreComponent,
         VendorsComponent,
-        FeedbackPopupComponent
+        FeedbackPopupComponent,
+        FeedbacksComponent
     ],
     imports: [
         BrowserAnimationsModule,

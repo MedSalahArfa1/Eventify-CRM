@@ -13,14 +13,14 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EventsComponent } from './pages/events/events.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { ExploreComponent } from './pages/explore/explore.component';
-import { RoleGuard } from './guards/Role.guard';
-import { AuthGuard } from './guards/Auth.guard';
+
 import { VendorsComponent } from './pages/vendors/vendors.component';
+import { FeedbacksComponent } from './pages/feedbacks/feedbacks.component';
 
 
 const routes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full' },
-    { path: 'index',                component: ComponentsComponent },
+    { path: 'index',                component: HomeComponent },
     { path: 'nucleoicons',          component: NucleoiconsComponent },
     { path: '',     component: HomeComponent },
     { path: 'login',       component: LoginComponent },
@@ -30,7 +30,8 @@ const routes: Routes =[
     { path: 'events', component: EventsComponent},
     { path: 'tasks', component: TasksComponent},
     { path: 'explore', component: ExploreComponent},
-    { path: 'vendors', component: VendorsComponent}
+    { path: 'vendors', component: VendorsComponent},
+    { path: 'feedbacks', component: FeedbacksComponent }
 
 ];
 

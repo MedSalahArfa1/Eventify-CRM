@@ -28,7 +28,7 @@
                 </div>
                 <div class="table-full-width table-responsive">
                   <table class="table">
-                    <thead>
+                    <thead class="text-primary">
                       <tr>
                         <th>Vendor Name</th>
                         <th>Company Name</th>
@@ -45,27 +45,21 @@
                         <td>{{ vendor.email }}</td>
                         <td>{{ vendor.phone }}</td>
                         <td>{{ vendor.serviceCategory }}</td>
-                        <td class="td-actions text-right">
+                        <td class="td-actions text-center">
                           <button 
-                            class="btn btn-info btn-sm" 
+                            class="btn btn-neutral btn-sm" 
                             (click)="openEditVendorCard(vendor)">
-                            Edit
+                            <i class="now-ui-icons ui-2_settings-90"></i>
                           </button>
                           <button 
-                            class="btn btn-danger btn-sm" 
+                            class="btn btn-neutral btn-sm" 
                             (click)="deleteVendor(vendor.vendorId)">
-                            Delete
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
                           </button>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                </div>
-              </div>
-              <div class="card-footer">
-                <hr>
-                <div class="stats">
-                  <i class="now-ui-icons loader_refresh spin"></i> Updated just now
                 </div>
               </div>
             </div>

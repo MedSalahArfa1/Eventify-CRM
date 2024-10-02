@@ -82,10 +82,6 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  isDocumentation() {
-    const titlee = this.location.prepareExternalUrl(this.location.path());
-    return titlee === '/documentation';
-  }
 
   logout() {
     this.authService.logout();

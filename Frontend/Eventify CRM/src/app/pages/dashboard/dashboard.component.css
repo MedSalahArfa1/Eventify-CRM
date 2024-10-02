@@ -1,0 +1,23 @@
+.card-chart {
+    border: 1px solid #ddd; /* Optional: Add a border for better visibility */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s; /* Add a transition for hover effect */
+  }
+  
+  .card-chart:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+  }
+  
+  .card-header {
+    background-color: #f5f5f5; /* Light background for card header */
+    border-bottom: 1px solid #ddd; /* Border between header and body */
+  }
+  
+  .chart-area {
+    display: flex; /* Center content inside the card body */
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure it takes full height */
+  }
+  

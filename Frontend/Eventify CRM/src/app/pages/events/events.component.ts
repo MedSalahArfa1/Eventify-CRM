@@ -14,6 +14,8 @@ export class EventsComponent implements OnInit {
   selectedImage: File | null = null;
   isImageUploaded: boolean = false;
   imagePreview: string | ArrayBuffer | null = null;
+  filteredEvents: Event[] = [];
+  searchQuery: string = '';
 
   constructor(private eventService: EventService) {}
 
@@ -21,17 +23,24 @@ export class EventsComponent implements OnInit {
     this.getEvents();
   }
 
-  getEvents() {
-    this.eventService.getEvents().subscribe((data: Event[]) => {
-      this.events = data.map(event => {
-        // Convert picByte to base64 for image preview if it exists
-        if (event.eventImage) {
-          event.imagePreview = 'data:image/jpeg;base64,' + this.convertUint8ToBase64(event.eventImage.picByte);
-        }
-        return event;
-      });
+  getEvents(): void {
+    this.eventService.getEvents().subscribe(events => {
+      this.events = events.sort((a, b) => new Date(b.startDateTime!).getTime() - new Date(a.startDateTime!).getTime()); // Sort events by start date
+      this.filterEvents(); // Initially display all events
     });
   }
+
+  filterEvents(): void {
+    if (!this.searchQuery.trim()) {
+      this.filteredEvents = this.events; // Reset the filter if search query is empty
+    } else {
+      const query = this.searchQuery.toLowerCase().trim();
+      this.filteredEvents = this.events.filter(event =>
+        event.eventName.toLowerCase().includes(query)
+      );
+    }
+  }
+  
 
   openAddEventCard() {
     this.resetForm();
