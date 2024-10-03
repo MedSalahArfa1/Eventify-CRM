@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from 'app/services/event.service'; // Adjust the import path as necessary
-import { Event, EventImage } from 'app/models/event.model'; // Adjust the import path as necessary
+import { EventService } from 'app/services/event.service';
+import { Event, EventImage } from 'app/models/event.model'; 
 import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 
@@ -46,8 +46,8 @@ export class ExploreComponent implements OnInit {
     this.filteredEvents.forEach(event => {
       this.eventService.getEventImage(event.eventId!).subscribe((image: EventImage) => {
         // Convert byte array to Base64 string
-        const base64String = btoa(String.fromCharCode.apply(null, image.picByte)); // Use apply instead of spread
-        this.eventImages[event.eventId!] = `data:image/jpeg;base64,${base64String}`; // Adjust content type as needed
+        const base64String = btoa(String.fromCharCode.apply(null, image.picByte)); 
+        this.eventImages[event.eventId!] = `data:image/jpeg;base64,${base64String}`;
       });
     });
   }

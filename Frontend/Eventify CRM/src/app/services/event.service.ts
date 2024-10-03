@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Event, EventImage } from 'app/models/event.model'; // Adjust the path according to your folder structure
+import { Event, EventImage } from 'app/models/event.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
-  private apiUrl = 'http://localhost:8082/api/events'; // Replace with your backend API URL
+  private apiUrl = 'http://localhost:8082/api/events';
   private imageUrl = 'http://localhost:8082/image'; // Set the base URL for image-related operations
 
   constructor(private http: HttpClient) { }

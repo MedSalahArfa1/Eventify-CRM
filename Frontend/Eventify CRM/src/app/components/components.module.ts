@@ -6,17 +6,9 @@ import { NouisliderModule } from 'ng2-nouislider';
 import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
-import { BasicelementsComponent } from './basicelements/basicelements.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { TypographyComponent } from './typography/typography.component';
-import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
-import { NotificationComponent } from './notification/notification.component';
-import { NgbdModalBasic } from './modal/modal.component';
-import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { EventModalComponent } from './event-modal/event-modal.component';
-import { FeedbackPopupComponent } from './feedback-popup/feedback-popup.component';
 
 
 @NgModule({
@@ -30,20 +22,12 @@ import { FeedbackPopupComponent } from './feedback-popup/feedback-popup.componen
       ],
     declarations: [
         ComponentsComponent,
-        BasicelementsComponent,
-        NavigationComponent,
-        TypographyComponent,
-        NucleoiconsComponent,
-        NotificationComponent,
-        NgbdModalBasic,
-        FooterComponent,
         SidebarComponent,
         NavbarComponent,
         EventModalComponent,
     ],
     exports:[ 
         ComponentsComponent,
-        FooterComponent,
         SidebarComponent,
         NavbarComponent,
         EventModalComponent,

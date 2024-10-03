@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Feedback } from 'app/models/feedback.model';
 import { Event } from 'app/models/event.model';
 import { FeedbackService } from 'app/services/feedback.service';
-import { TaskService } from 'app/services/task.service'; // If you need events from tasks service
+import { TaskService } from 'app/services/task.service';
 
 @Component({
   selector: 'app-feedbacks',

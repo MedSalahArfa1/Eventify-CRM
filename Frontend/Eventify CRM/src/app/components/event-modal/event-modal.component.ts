@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Event } from 'app/models/event.model'; // Adjust the path according to your folder structure
+import { Event } from 'app/models/event.model';
 
 @Component({
   selector: 'app-event-modal',

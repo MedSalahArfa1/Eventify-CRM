@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
 
   getUserDetails() {
     this.authService.getUserDetails().subscribe((data) => {
-      this.username = data.username; // Assuming 'username' is a property in the returned user data
+      this.username = data.username;
     });
   }
 }

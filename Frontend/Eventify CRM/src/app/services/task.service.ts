@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from 'app/models/task.model';
-import { Event } from 'app/models/event.model'; // Adjust the path as needed
+import { Event } from 'app/models/event.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:8082/api/tasks'; // Adjust the URL as needed
+  private baseUrl = 'http://localhost:8082/api/tasks';
 
   constructor(private http: HttpClient) {}
 
@@ -39,6 +39,6 @@ export class TaskService {
   }
 
   getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>('http://localhost:8082/api/events'); // Adjust the URL as needed
+    return this.http.get<Event[]>('http://localhost:8082/api/events');
   }
 }

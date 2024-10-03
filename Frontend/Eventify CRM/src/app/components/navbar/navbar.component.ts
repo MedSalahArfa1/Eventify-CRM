@@ -52,7 +52,6 @@ export class NavbarComponent implements OnInit {
   }
 
   checkRoute(url: string) {
-    // Add routes here where you want to hide the navbar
     const hiddenRoutes = ['/dashboard', '/events', '/tasks', '/vendors', '/feedbacks'];
     this.showNavbar = !hiddenRoutes.includes(url);
   }

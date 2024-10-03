@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Feedback } from 'app/models/feedback.model'; // Adjust the path to your Feedback model
+import { Feedback } from 'app/models/feedback.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
-  private baseUrl = `http://localhost:8082/api/feedbacks`; // Adjust the base URL according to your API
+  private baseUrl = `http://localhost:8082/api/feedbacks`;
 
   constructor(private http: HttpClient) {}
 

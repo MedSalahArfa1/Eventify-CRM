@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FeedbackService } from 'app/services/feedback.service';
-import { Feedback } from 'app/models/feedback.model'; // Adjust the import path as necessary
-import { AuthService } from 'app/services/auth.service'; // Import AuthService
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-feedback-popup',
@@ -33,7 +32,6 @@ export class FeedbackPopupComponent {
           this.closePopup(); // Close the popup
       }, error => {
           console.error('Error adding feedback:', error);
-          // Handle error (e.g., show error message)
       });
     }
   }
